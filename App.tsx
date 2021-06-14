@@ -1,5 +1,6 @@
 import React from "react"
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from "react-native"
+import { API_KEY, T } from "@env"
 
 import Heading from "./components/Heading"
 
@@ -8,7 +9,7 @@ const App = () => {
     <SafeAreaView style={styles.sectionContainer}>
       <StatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Heading text="McMapper" />
+        <Heading text={`${API_KEY}`} />
       </ScrollView>
     </SafeAreaView>
   )
@@ -17,7 +18,7 @@ const App = () => {
 const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
-    paddingHorizontal: 24,
+    paddingHorizontal: 24, 
     justifyContent: "center",
     alignItems: "center",
   },
