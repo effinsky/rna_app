@@ -1,10 +1,14 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from "react-native"
+import SplashScreen from "react-native-splash-screen"
 import { API_KEY, T } from "@env"
 
 import Heading from "./components/Heading"
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide()
+  }, [])
   return (
     <SafeAreaView style={styles.sectionContainer}>
       <StatusBar />
@@ -18,7 +22,7 @@ const App = () => {
 const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
-    paddingHorizontal: 24, 
+    paddingHorizontal: 24,
     justifyContent: "center",
     alignItems: "center",
   },
