@@ -4,6 +4,7 @@ import SplashScreen from "react-native-splash-screen"
 import { API_KEY, T } from "@env"
 
 import Heading from "./components/Heading"
+import Location from "./components/Location"
 
 const App = () => {
   useEffect(() => {
@@ -14,6 +15,7 @@ const App = () => {
       <StatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Heading text={`${API_KEY}`} />
+        <Location />
       </ScrollView>
     </SafeAreaView>
   )
