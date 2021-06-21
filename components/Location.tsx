@@ -5,13 +5,13 @@ import Geolocation from "react-native-geolocation-service"
 
 // types for GeolocationResponse
 export type LocationType = {
-  coords: Coords
+  coords: CoordsType
   mocked: boolean
   provider: string
   timestamp: number
 }
 
-type Coords = {
+type CoordsType = {
   accuracy: number
   altitude: number
   altitudeAccuracy: number
