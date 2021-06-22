@@ -43,7 +43,7 @@ const Location = () => {
 
     function enableLocation() {
       Geolocation.getCurrentPosition(
-        // making TS happy
+        // making TSC happy
         position => {
           setLocationResponse(position as Required<LocationResponseType>)
         },
@@ -62,7 +62,15 @@ const Location = () => {
   return (
     <View>
       {/* hardcoded for Barcelona */}
-      <SunCalc longitude={2.17403} latitude={41.40338} />
+      {locationResponse ? (
+        <SunCalc
+          longitude={locationResponse.coords.latitude}
+          latitude={locationResponse.coords.longitude}
+        />
+      ) : (
+        <Text>No Location Data Provided</Text>
+      )}
+      {/* <SunCalc longitude={2.17403} latitude={41.40338} /> */}
     </View>
   )
 }
