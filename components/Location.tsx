@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { StyleSheet, Text, Platform, ScrollView as View } from "react-native"
 import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions"
 import Geolocation from "react-native-geolocation-service"
+import { SunCalc } from "./SunCalc"
 
 export interface LocationResponseType {
   mocked: boolean
@@ -57,12 +58,11 @@ const Location = () => {
     }
     // no cleanup necessary withGetCurrentPosition
   }, [permission])
-  console.log(locationResponse)
 
   return (
     <View>
-      <Text>{locationResponse?.coords.latitude}</Text>
-      <Text>{locationResponse?.coords.longitude}</Text>
+      {/* hardcoded for Barcelona */}
+      <SunCalc longitude={2.17403} latitude={41.40338} />
     </View>
   )
 }
