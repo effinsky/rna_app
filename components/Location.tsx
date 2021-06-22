@@ -61,7 +61,6 @@ const Location = () => {
 
   return (
     <View>
-      {/* hardcoded for Barcelona */}
       {locationResponse ? (
         <SunCalc
           longitude={locationResponse.coords.latitude}
