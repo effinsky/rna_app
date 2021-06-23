@@ -1,3 +1,5 @@
+import 'react-native-gesture-handler'
+import { NavigationContainer } from '@react-navigation/native'
 import React, { useEffect } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
@@ -11,11 +13,13 @@ const App = () => {
     SplashScreen.hide()
   }, [])
   return (
-    <View style={styles.container}>
-      {/* <Location /> */}
-      {/* <CacheSearch /> */}
-      <CacheDetails />
-    </View>
+    <NavigationContainer>
+      <View style={styles.container}>
+        {/* <Location /> */}
+        {/* <CacheSearch /> */}
+        <CacheDetails />
+      </View>
+    </NavigationContainer>
   )
 }
 
