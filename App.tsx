@@ -3,8 +3,7 @@ import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import { API_KEY, T } from '@env'
 
-import Heading from './components/Heading'
-import { RadiusForm } from './components/RadiusForm'
+import { CacheSearch } from './components/CacheSearch'
 
 const App = () => {
   useEffect(() => {
@@ -14,8 +13,7 @@ const App = () => {
     <SafeAreaView style={styles.sectionContainer}>
       <StatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Heading text={`${API_KEY}`} />
-        <RadiusForm />
+        <CacheSearch />
       </ScrollView>
     </SafeAreaView>
   )
