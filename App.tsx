@@ -1,10 +1,10 @@
-import React, { useEffect } from "react"
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from "react-native"
-import SplashScreen from "react-native-splash-screen"
-import { API_KEY, T } from "@env"
+import React, { useEffect } from 'react'
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native'
+import SplashScreen from 'react-native-splash-screen'
+import { API_KEY, T } from '@env'
 
-import Heading from "./components/Heading"
-import { RadiusForm } from "./components/RadiusForm"
+import Heading from './components/Heading'
+import { RadiusForm } from './components/RadiusForm'
 
 const App = () => {
   useEffect(() => {
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })
 

@@ -1,11 +1,11 @@
-import React from "react"
-import Slider from "@react-native-community/slider"
-import { View, Text } from "react-native"
+import React from 'react'
+import Slider from '@react-native-community/slider'
+import { View, Text } from 'react-native'
 interface RadiusFormProps {}
 
 export const RadiusForm: React.FC<RadiusFormProps> = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center" }}>
+    <View style={{ flex: 1, alignItems: 'center' }}>
       <Text>Set Radius</Text>
       <Slider
         style={{ width: 300, height: 80 }}
