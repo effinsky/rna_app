@@ -20,28 +20,32 @@ export const SunCalc: FunctionComponent<SunCalcProps> = ({
   const [times, setTimes] = useState<SunTimes[]>([])
 
   useEffect(() => {
-    // rework to loop over and get info for 10 days
-    const sunriseDateToday = getSunrise(latitude, longitude)
-    const sunsetDateToday = getSunset(latitude, longitude)
+    const timesContainer = [] as SunTimes[]
 
-    const todayTimes = {
-      sunrise: getHoursAndMinutes(sunriseDateToday),
-      sunset: getHoursAndMinutes(sunsetDateToday),
+    for (let i = 0; i < 10; i++) {
+      const sunriseDate = getSunrise(latitude, longitude, getFutureDate(i))
+      const sunsetDate = getSunset(latitude, longitude, getFutureDate(i))
+      const times = {
+        sunrise: getHoursAndMinutes(sunriseDate),
+        sunset: getHoursAndMinutes(sunsetDate),
+      }
+      timesContainer.push(times)
     }
 
-    const sunriseDate10Days = getSunrise(latitude, longitude, getFutureDate(10))
-    const sunsetDate10Days = getSunset(latitude, longitude, getFutureDate(10))
+    // alternatively but seems less clear
+    // const timesContainer = new Array<SunTimes | null>(10)
+    //   .fill(null)
+    //   .map((_, i) => {
+    //     const sunriseDate = getSunrise(latitude, longitude, getFutureDate(i))
+    //     const sunsetDate = getSunset(latitude, longitude, getFutureDate(i))
+    //     const times = {
+    //       sunrise: getHoursAndMinutes(sunriseDate),
+    //       sunset: getHoursAndMinutes(sunsetDate),
+    //     }
+    //     return times
+    //   })
 
-    const plus10DaysTimes = {
-      sunrise: getHoursAndMinutes(sunriseDate10Days),
-      sunset: getHoursAndMinutes(sunsetDate10Days),
-    }
-
-    const t = []
-    t.push(todayTimes)
-    t.push(plus10DaysTimes)
-
-    setTimes(t)
+    setTimes(timesContainer)
   }, [])
 
   const getFutureDate = (daysOffset: number): Date => {

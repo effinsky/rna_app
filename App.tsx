@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from "react-native"
+import { SafeAreaView, StyleSheet } from "react-native"
 import SplashScreen from "react-native-splash-screen"
 import { API_KEY, T } from "@env"
 
@@ -12,7 +12,6 @@ const App = () => {
   }, [])
   return (
     <SafeAreaView style={styles.sectionContainer}>
-      <StatusBar />
       <Heading text={`${API_KEY}`} />
       <Location />
     </SafeAreaView>
