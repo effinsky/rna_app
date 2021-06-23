@@ -1,6 +1,7 @@
 import React, { useState, FunctionComponent, useEffect } from "react"
 import { Text, View } from "react-native"
 import { getSunrise, getSunset } from "sunrise-sunset-js"
+
 import SunDisplay from "./SunDisplay"
 
 interface SunCalcProps {

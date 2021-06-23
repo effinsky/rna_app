@@ -14,6 +14,8 @@ export const CacheSearch: React.FC<CacheSearchProps> = () => {
   const [caches, setCaches] = useState({})
   const [executeSearch, setExecuteSearch] = useState(false)
 
+  console.log(CONSUMER_KEY)
+
   const handleRadiusChange = useCallback(
     (newSliderValue: number) => {
       setRadiusValue(+newSliderValue.toFixed(2))
@@ -45,7 +47,7 @@ export const CacheSearch: React.FC<CacheSearchProps> = () => {
           console.error(error)
         })
         .finally(() => {
-          console.log('request done')
+          console.log('request executed')
           setExecuteSearch(false)
         })
     }

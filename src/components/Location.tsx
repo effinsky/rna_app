@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { StyleSheet, Text, Platform, ScrollView as View } from "react-native"
 import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions"
 import Geolocation from "react-native-geolocation-service"
+
 import { SunCalc } from "./SunCalc"
 
 export interface LocationResponseType {
