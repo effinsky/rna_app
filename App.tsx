@@ -1,21 +1,20 @@
 import React, { useEffect } from 'react'
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import { API_KEY, T } from '@env'
 
 import { CacheSearch } from './components/CacheSearch'
+import Location from './components/Location'
 
 const App = () => {
   useEffect(() => {
     SplashScreen.hide()
   }, [])
   return (
-    <SafeAreaView style={styles.sectionContainer}>
-      <StatusBar />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <CacheSearch />
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView style={styles.sectionContainer}>
+      <Location />
+      <CacheSearch />
+    </ScrollView>
   )
 }
 
