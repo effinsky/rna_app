@@ -1,5 +1,5 @@
 declare module "@env" {
-  export const API_KEY: string
-  export const URL: string
-  export const T: string
+  export const CONSUMER_KEY: string
+  export const CONSUMER_SECRET: string
+  
 }

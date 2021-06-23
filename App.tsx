@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
-import { API_KEY, T } from '@env'
 
 import { CacheSearch } from './components/CacheSearch'
 import Location from './components/Location'
@@ -11,19 +10,18 @@ const App = () => {
     SplashScreen.hide()
   }, [])
   return (
-    <ScrollView style={styles.sectionContainer}>
-      <Location />
+    <View style={styles.container}>
+      {/* <Location /> */}
       <CacheSearch />
-    </ScrollView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
+  container: {
+    flex: 1,
     marginTop: 32,
     paddingHorizontal: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 })
 
