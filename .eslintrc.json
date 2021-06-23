@@ -16,7 +16,6 @@
   "rules": {
     "comma-dangle": "off",
     "no-use-before-define": "warn",
-    "quotes": "off",
     "no-unused-vars": "warn"
   }
 }
