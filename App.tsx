@@ -13,10 +13,8 @@ const App = () => {
   return (
     <SafeAreaView style={styles.sectionContainer}>
       <StatusBar />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Heading text={`${API_KEY}`} />
-        <Location />
-      </ScrollView>
+      <Heading text={`${API_KEY}`} />
+      <Location />
     </SafeAreaView>
   )
 }

@@ -8,24 +8,47 @@ interface SunCalcProps {
   longitude: number
 }
 
+export interface SunTimes {
+  sunrise: string
+  sunset: string
+}
+
 export const SunCalc: FunctionComponent<SunCalcProps> = ({
   latitude,
   longitude,
 }) => {
-  const [times, setTimes] = useState<{ sunset: string; sunrise: string }>({
-    sunrise: "",
-    sunset: "",
-  })
+  const [times, setTimes] = useState<SunTimes[]>([])
 
   useEffect(() => {
-    const sunriseDate = getSunrise(latitude, longitude)
-    const sunsetDate = getSunset(latitude, longitude)
+    // rework to loop over and get info for 10 days
+    const sunriseDateToday = getSunrise(latitude, longitude)
+    const sunsetDateToday = getSunset(latitude, longitude)
 
-    setTimes({
-      sunrise: getHoursAndMinutes(sunriseDate),
-      sunset: getHoursAndMinutes(sunsetDate),
-    })
-  }, [times.sunrise, times.sunset])
+    const todayTimes = {
+      sunrise: getHoursAndMinutes(sunriseDateToday),
+      sunset: getHoursAndMinutes(sunsetDateToday),
+    }
+
+    const sunriseDate10Days = getSunrise(latitude, longitude, getFutureDate(10))
+    const sunsetDate10Days = getSunset(latitude, longitude, getFutureDate(10))
+
+    const plus10DaysTimes = {
+      sunrise: getHoursAndMinutes(sunriseDate10Days),
+      sunset: getHoursAndMinutes(sunsetDate10Days),
+    }
+
+    const t = []
+    t.push(todayTimes)
+    t.push(plus10DaysTimes)
+
+    setTimes(t)
+  }, [])
+
+  const getFutureDate = (daysOffset: number): Date => {
+    const d = new Date()
+    d.setDate(d.getDate() + daysOffset)
+    return d
+  }
 
   const getHoursAndMinutes = (date: Date): string => {
     const hours = date.getHours()
