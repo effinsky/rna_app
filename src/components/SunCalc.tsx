@@ -1,8 +1,7 @@
-import React, { useState, FunctionComponent, useEffect } from "react"
-import { Text, View } from "react-native"
-import { getSunrise, getSunset } from "sunrise-sunset-js"
+import React, { useState, FunctionComponent, useEffect } from 'react'
+import { getSunrise, getSunset } from 'sunrise-sunset-js'
 
-import SunDisplay from "./SunDisplay"
+import SunDisplay from './SunDisplay'
 
 interface SunCalcProps {
   latitude: number
@@ -61,9 +60,5 @@ export const SunCalc: FunctionComponent<SunCalcProps> = ({
     return `${hours}:${minutes}`
   }
 
-  return (
-    <View>
-      <SunDisplay times={times} />
-    </View>
-  )
+  return <SunDisplay times={times} />
 }

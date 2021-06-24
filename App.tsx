@@ -14,8 +14,8 @@ const App = () => {
   return (
     <NavigationContainer>
       <View style={styles.container}>
-        {/* <Location /> */}
-        <CacheSearch />
+        <Location />
+        {/* <CacheSearch /> */}
       </View>
     </NavigationContainer>
   )

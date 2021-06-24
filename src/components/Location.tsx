@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react"
-import { StyleSheet, Text, Platform, ScrollView as View } from "react-native"
-import { check, request, PERMISSIONS, RESULTS } from "react-native-permissions"
-import Geolocation from "react-native-geolocation-service"
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, Platform, ScrollView as View } from 'react-native'
+import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions'
+import Geolocation from 'react-native-geolocation-service'
 
-import { SunCalc } from "./SunCalc"
+import { SunCalc } from './SunCalc'
 
 export interface LocationResponseType {
   mocked: boolean
@@ -25,7 +25,7 @@ const Location = () => {
     useState<null | LocationResponseType>(null)
 
   const permission =
-    Platform.OS === "android"
+    Platform.OS === 'android'
       ? PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION
       : PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
 
@@ -51,7 +51,7 @@ const Location = () => {
         err => console.error(err.code, err.message),
         {
           enableHighAccuracy: true,
-          accuracy: { android: "high" },
+          accuracy: { android: 'high' },
           distanceFilter: 0,
           showLocationDialog: true,
         },
@@ -64,13 +64,14 @@ const Location = () => {
     <View>
       {locationResponse ? (
         <SunCalc
-          longitude={locationResponse.coords.latitude}
-          latitude={locationResponse.coords.longitude}
+          // latitude={locationResponse.coords.latitude}
+          // longitude={locationResponse.coords.longitude}
+          latitude={54.5062}
+          longitude={16.4734}
         />
       ) : (
         <Text>No Location Data Provided</Text>
       )}
-      {/* <SunCalc longitude={2.17403} latitude={41.40338} /> */}
     </View>
   )
 }
