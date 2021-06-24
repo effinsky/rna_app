@@ -1,20 +1,33 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Button, StyleSheet, Pressable } from 'react-native'
-import { CONSUMER_KEY } from '@env'
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  Pressable,
+  FlatList,
+} from 'react-native'
+// import { CONSUMER_KEY } from '@env'
 import axios from 'axios'
 import { useCallback } from 'react'
 
 import RadiusSlider from './RadiusSlider'
 
+// using a local consumer_key for now since @env fails to load key sometimes
+const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
+
 interface CacheSearchProps {}
+
+interface CacheListElementType {
+  code: string
+  name: string
+}
 
 // will also need access to lat|long (pass through context?)
 export const CacheSearch: React.FC<CacheSearchProps> = () => {
-  const [radiusValue, setRadiusValue] = useState(1)
-  const [caches, setCaches] = useState({})
+  const [radiusValue, setRadiusValue] = useState(3)
+  const [caches, setCaches] = useState([] as CacheListElementType[])
   const [executeSearch, setExecuteSearch] = useState(false)
-
-  console.log(CONSUMER_KEY)
 
   const handleRadiusChange = useCallback(
     (newSliderValue: number) => {
@@ -31,17 +44,22 @@ export const CacheSearch: React.FC<CacheSearchProps> = () => {
           {
             params: {
               search_method: 'services/caches/search/nearest',
-              search_params: { center: '49|19', radius: radiusValue },
+              search_params: { center: '54.3|22.3', radius: radiusValue },
               retr_method: 'services/caches/geocaches',
-              retr_params: { fields: 'name|location|type' },
+              retr_params: { fields: 'name' },
               wrap: false,
               consumer_key: 'wNcQ3up26jfZ4FBkb6Cc',
             },
           },
         )
         .then(response => {
-          setCaches(response.data)
-          console.log(response.status)
+          const cacheContainer = []
+          for (const key in response.data) {
+            const { name } = response.data[key]
+            const cache = { code: key, name }
+            cacheContainer.push(cache)
+          }
+          setCaches(cacheContainer)
         })
         .catch(error => {
           console.error(error)
@@ -60,7 +78,6 @@ export const CacheSearch: React.FC<CacheSearchProps> = () => {
         radiusValue={radiusValue}
         handleRadiusChange={handleRadiusChange}
       />
-
       <Text>Current Value: {radiusValue} km</Text>
       <Pressable
         style={styles.searchBtn}
@@ -68,6 +85,25 @@ export const CacheSearch: React.FC<CacheSearchProps> = () => {
       >
         <Text>Search Caches</Text>
       </Pressable>
+      {caches?.length > 0 ? (
+        <FlatList
+          data={caches}
+          renderItem={({ item }) => (
+            <View>
+              <Pressable
+                onPress={() => {
+                  // navigate to cache details screen
+                }}
+              >
+                <Text>{item.name}</Text>
+              </Pressable>
+            </View>
+          )}
+          keyExtractor={item => item.code}
+        />
+      ) : (
+        <Text>Perform Search to Display Caches</Text>
+      )}
     </View>
   )
 }

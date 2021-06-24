@@ -13,9 +13,9 @@ const RadiusSlider: React.FC<RadiusSliderProps> = ({
   return (
     <Slider
       style={{ width: 300, height: 80 }}
-      minimumValue={1}
-      maximumValue={3}
-      step={0.2}
+      minimumValue={radiusValue}
+      maximumValue={50}
+      step={1}
       minimumTrackTintColor="crimson"
       maximumTrackTintColor="black"
       value={radiusValue}

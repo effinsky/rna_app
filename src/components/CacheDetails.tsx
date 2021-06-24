@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native'
 
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
-const CACHE_CODE = 'OP0022'
+const CACHE_CODE = 'OP0001'
 
 type DetailsResponseType = {
   name: string
@@ -21,9 +21,12 @@ const CacheDetails: React.FC<CacheDetailsProps> = () => {
   const [isLoading, setIsLoading] = useState()
 
   useEffect(() => {
-    axios(
-      `https://opencaching.pl/okapi/services/caches/geocache?cache_code=${CACHE_CODE}&consumer_key=${CONSUMER_KEY}`,
-    )
+    axios('https://opencaching.pl/okapi/services/caches/geocache', {
+      params: {
+        cache_code: CACHE_CODE,
+        consumer_key: CONSUMER_KEY,
+      },
+    })
       .then(response => setDetails(response.data))
       .catch(err => console.error(err))
   }, [details])
