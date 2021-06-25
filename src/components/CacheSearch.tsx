@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  Pressable,
-  FlatList,
-} from 'react-native'
+import React, { useState, useEffect, useContext } from 'react'
+import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native'
 // import { CONSUMER_KEY } from '@env'
 import axios from 'axios'
 import { useCallback } from 'react'
 
 import RadiusSlider from './RadiusSlider'
+import { LocationContext, LocationType } from '../context/LocationContext'
 
 // using a local consumer_key for now since @env fails to load key sometimes
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
@@ -24,8 +18,11 @@ interface CacheListElementType {
 }
 
 // will also need access to lat|long (pass through context?)
-export const CacheSearch: React.FC<CacheSearchProps> = () => {
+const CacheSearch: React.FC<CacheSearchProps> = () => {
   const [radiusValue, setRadiusValue] = useState(3)
+  const {
+    coords: { latitude, longitude },
+  } = useContext<null | LocationType>(LocationContext)!
   const [caches, setCaches] = useState([] as CacheListElementType[])
   const [executeSearch, setExecuteSearch] = useState(false)
 
@@ -44,7 +41,10 @@ export const CacheSearch: React.FC<CacheSearchProps> = () => {
           {
             params: {
               search_method: 'services/caches/search/nearest',
-              search_params: { center: '54.3|22.3', radius: radiusValue },
+              search_params: {
+                center: `${latitude}|${longitude}`,
+                radius: radiusValue,
+              },
               retr_method: 'services/caches/geocaches',
               retr_params: { fields: 'name' },
               wrap: false,
@@ -126,3 +126,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'skyblue',
   },
 })
+
+export default CacheSearch

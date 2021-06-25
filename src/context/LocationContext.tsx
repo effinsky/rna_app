@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, Platform, ScrollView as View } from 'react-native'
-import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { Platform } from 'react-native'
+import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions'
 import Geolocation from 'react-native-geolocation-service'
 
-import { SunCalc } from './SunCalc'
-
-export interface LocationResponseType {
+export interface LocationType {
   mocked: boolean
   provider: string
   timestamp: number
@@ -20,9 +18,12 @@ export interface LocationResponseType {
   }
 }
 
-const Location = () => {
-  const [locationResponse, setLocationResponse] =
-    useState<null | LocationResponseType>(null)
+const LocationContext = createContext<LocationType | null>(null)
+
+const LocationContextProvider: React.FC<{}> = ({ children }) => {
+  const [locationResponse, setLocationResponse] = useState<null | LocationType>(
+    null,
+  )
 
   const permission =
     Platform.OS === 'android'
@@ -39,16 +40,15 @@ const Location = () => {
             enableLocation()
           }
         })
+      } else {
+        throw 'location inaccessible'
       }
     })
 
-    function enableLocation() {
+    const enableLocation = () => {
       Geolocation.getCurrentPosition(
-        // making TSC happy
-        position => {
-          setLocationResponse(position as Required<LocationResponseType>)
-        },
-        err => console.error(err.code, err.message),
+        position => setLocationResponse(position as Required<LocationType>),
+        err => console.error(err),
         {
           enableHighAccuracy: true,
           accuracy: { android: 'high' },
@@ -57,23 +57,14 @@ const Location = () => {
         },
       )
     }
-    // no cleanup necessary withGetCurrentPosition
+    // cleanup necessary?
   }, [permission])
 
   return (
-    <View>
-      {locationResponse ? (
-        <SunCalc
-          // latitude={locationResponse.coords.latitude}
-          // longitude={locationResponse.coords.longitude}
-          latitude={54.5062}
-          longitude={16.4734}
-        />
-      ) : (
-        <Text>No Location Data Provided</Text>
-      )}
-    </View>
+    <LocationContext.Provider value={locationResponse}>
+      {children}
+    </LocationContext.Provider>
   )
 }
 
-export default Location
+export { LocationContextProvider, LocationContext }
