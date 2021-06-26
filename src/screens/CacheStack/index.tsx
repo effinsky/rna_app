@@ -2,8 +2,8 @@ import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
 
 import {CacheStackParamList} from './CacheStackParamList'
-import CacheSearch from '../components/CacheSearch'
-import CacheDetails from '../components/CacheDetails'
+import CacheSearch from '../../components/CacheSearch'
+import CacheDetails from '../../components/CacheDetails'
 
 const Stack = createStackNavigator()
 

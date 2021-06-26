@@ -4,8 +4,8 @@ import React, {useEffect} from 'react'
 import {StyleSheet, SafeAreaView} from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 
-import CacheStack from './src/screens/CacheStack'
 import {LocationContextProvider} from './src/context/LocationContext'
+import HomeScreen from './src/screens/HomeScreen'
 
 const App = () => {
   useEffect(() => {
@@ -15,7 +15,7 @@ const App = () => {
     <NavigationContainer>
       <LocationContextProvider>
         <SafeAreaView style={styles.container}>
-          <CacheStack />
+          <HomeScreen />
         </SafeAreaView>
       </LocationContextProvider>
     </NavigationContainer>
