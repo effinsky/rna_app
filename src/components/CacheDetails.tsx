@@ -1,10 +1,10 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Text } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import {Button, StyleSheet, View} from 'react-native'
+import {Text} from 'react-native'
+import {CacheStackNavProps} from '../screens/CacheStackParamList'
 
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
-const CACHE_CODE = 'OP0001'
 
 type DetailsResponseType = {
   name: string
@@ -14,29 +14,35 @@ type DetailsResponseType = {
   type: string
 }
 
-interface CacheDetailsProps {}
-
-const CacheDetails: React.FC<CacheDetailsProps> = () => {
+const CacheDetails: React.FC<CacheStackNavProps<'CacheDetails'>> = ({
+  route,
+  navigation,
+}) => {
   const [details, setDetails] = useState<DetailsResponseType | null>(null)
-  const [isLoading, setIsLoading] = useState()
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
     axios('https://opencaching.pl/okapi/services/caches/geocache', {
       params: {
-        cache_code: CACHE_CODE,
+        cache_code: route.params.cacheCode,
         consumer_key: CONSUMER_KEY,
       },
     })
-      .then(response => setDetails(response.data))
+      .then(response => {
+        setDetails(response.data)
+      })
       .catch(err => console.error(err))
-  }, [details])
+      .finally(() => {
+        setIsLoading(false)
+      })
+  }, [details, route])
 
   if (isLoading) {
     return <Text>Loading...</Text>
   }
 
   if (details) {
-    const { name, code, type, location, status } = details
+    const {name, code, type, location, status} = details
     return (
       <View>
         <Text style={styles.heading}>{name}</Text>
@@ -44,6 +50,12 @@ const CacheDetails: React.FC<CacheDetailsProps> = () => {
         <Text> Code: {code}</Text>
         <Text>Location: {location}</Text>
         <Text>Status: {status}</Text>
+        <Button
+          title="Back to Caches"
+          onPress={() => {
+            navigation.navigate('CacheSearch')
+          }}
+        />
       </View>
     )
   }

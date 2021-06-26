@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { View, Text, StyleSheet, Pressable, FlatList } from 'react-native'
-// import { CONSUMER_KEY } from '@env'
+import React, {useState, useEffect, useContext} from 'react'
+import {View, Text, StyleSheet, Pressable, FlatList} from 'react-native'
+// import {CONSUMER_KEY} from '@env'
 import axios from 'axios'
-import { useCallback } from 'react'
+import {useCallback} from 'react'
 
 import RadiusSlider from './RadiusSlider'
-import { LocationContext, LocationType } from '../context/LocationContext'
+import {LocationContext, LocationType} from '../context/LocationContext'
+import {CacheStackNavProps} from '../screens/CacheStackParamList'
 
 // using a local consumer_key for now since @env fails to load key sometimes
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
-
-interface CacheSearchProps {}
 
 interface CacheListElementType {
   code: string
@@ -18,20 +17,20 @@ interface CacheListElementType {
 }
 
 // will also need access to lat|long (pass through context?)
-const CacheSearch: React.FC<CacheSearchProps> = () => {
+const CacheSearch: React.FC<CacheStackNavProps<'CacheSearch'>> = ({
+  navigation,
+}) => {
   const [radiusValue, setRadiusValue] = useState(3)
-  const {
-    coords: { latitude, longitude },
-  } = useContext<null | LocationType>(LocationContext)!
+
+  // const {
+  //   coords: {latitude, longitude},
+  // } = useContext<null | LocationType>(LocationContext)!
   const [caches, setCaches] = useState([] as CacheListElementType[])
   const [executeSearch, setExecuteSearch] = useState(false)
 
-  const handleRadiusChange = useCallback(
-    (newSliderValue: number) => {
-      setRadiusValue(+newSliderValue.toFixed(2))
-    },
-    [radiusValue],
-  )
+  const handleRadiusChange = useCallback((newSliderValue: number) => {
+    setRadiusValue(+newSliderValue.toFixed(2))
+  }, [])
 
   useEffect(() => {
     if (executeSearch) {
@@ -42,21 +41,21 @@ const CacheSearch: React.FC<CacheSearchProps> = () => {
             params: {
               search_method: 'services/caches/search/nearest',
               search_params: {
-                center: `${latitude}|${longitude}`,
+                center: '51.1079|17.0385',
                 radius: radiusValue,
               },
               retr_method: 'services/caches/geocaches',
-              retr_params: { fields: 'name' },
+              retr_params: {fields: 'name'},
               wrap: false,
-              consumer_key: 'wNcQ3up26jfZ4FBkb6Cc',
+              consumer_key: CONSUMER_KEY,
             },
           },
         )
         .then(response => {
           const cacheContainer = []
           for (const key in response.data) {
-            const { name } = response.data[key]
-            const cache = { code: key, name }
+            const {name} = response.data[key]
+            const cache = {code: key, name}
             cacheContainer.push(cache)
           }
           setCaches(cacheContainer)
@@ -69,7 +68,7 @@ const CacheSearch: React.FC<CacheSearchProps> = () => {
           setExecuteSearch(false)
         })
     }
-  }, [executeSearch])
+  }, [executeSearch, radiusValue])
 
   return (
     <View style={styles.container}>
@@ -88,11 +87,13 @@ const CacheSearch: React.FC<CacheSearchProps> = () => {
       {caches?.length > 0 ? (
         <FlatList
           data={caches}
-          renderItem={({ item }) => (
+          renderItem={({item}) => (
             <View>
               <Pressable
                 onPress={() => {
-                  // navigate to cache details screen
+                  navigation.navigate('CacheDetails', {
+                    cacheCode: item.code,
+                  })
                 }}
               >
                 <Text>{item.name}</Text>
@@ -111,6 +112,7 @@ const CacheSearch: React.FC<CacheSearchProps> = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    backgroundColor: '#eee',
   },
   searchBtn: {
     justifyContent: 'center',
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
     margin: 20,
     borderStyle: 'solid',
     borderWidth: 2,
-    borderColor: '#333',
+    borderColor: '#8d8686',
     borderRadius: 8,
     paddingHorizontal: 10,
     backgroundColor: 'skyblue',

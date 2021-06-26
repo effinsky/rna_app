@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 // change out this lib
-import { getSunrise, getSunset } from 'sunrise-sunset-js'
+import {getSunrise, getSunset} from 'sunrise-sunset-js'
 
-import { AppContext, LocationType } from '../context/LocationContext'
+import {AppContext, LocationType} from '../context/LocationContext'
 import SunDisplay from './SunDisplay'
 
 export interface SunTimes {
@@ -13,7 +13,7 @@ export interface SunTimes {
 export const SunCalc: React.FC<{}> = () => {
   // get lat and long from location context
   const {
-    coords: { latitude, longitude },
+    coords: {latitude, longitude},
   } = useContext<LocationType | null>(AppContext)!
   const [times, setTimes] = useState<SunTimes[]>([])
 

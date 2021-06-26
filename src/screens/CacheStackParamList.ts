@@ -3,8 +3,7 @@ import {StackNavigationProp} from '@react-navigation/stack'
 
 export type CacheStackParamList = {
   CacheSearch: undefined
-  CacheDetails: undefined
-  // EditProduct: {name: string; submit?: React.MutableRefObject<() => void>}
+  CacheDetails: {cacheCode: string}
 }
 
 export type CacheStackNavProps<T extends keyof CacheStackParamList> = {
