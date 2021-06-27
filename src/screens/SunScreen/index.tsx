@@ -38,7 +38,7 @@ const SunScreen: React.FC<{}> = () => {
 
     setTimes(timesList)
   }, [])
-
+  // helpers
   const getFutureDate = (daysOffset: number): Date => {
     const d = new Date()
     d.setDate(d.getDate() + daysOffset)
