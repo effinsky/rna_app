@@ -6,7 +6,7 @@ import {useCallback} from 'react'
 
 import RadiusSlider from './RadiusSlider'
 import {LocationContext, LocationType} from '../context/LocationContext'
-import {CacheStackNavProps} from '../screens/CacheStackParamList'
+import {CacheStackNavProps} from '../screens/CacheStack/CacheStackParamList'
 
 // using a local consumer_key for now since @env fails to load key sometimes
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
@@ -24,7 +24,7 @@ const CacheSearch: React.FC<CacheStackNavProps<'CacheSearch'>> = ({
 
   // const {
   //   coords: {latitude, longitude},
-  // } = useContext<null | LocationType>(LocationContext)!
+  // } = useContext<null | LocationType>(LocationContext)
   const [caches, setCaches] = useState([] as CacheListElementType[])
   const [executeSearch, setExecuteSearch] = useState(false)
 

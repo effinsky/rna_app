@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, {useEffect, useState} from 'react'
 import {Button, StyleSheet, View} from 'react-native'
 import {Text} from 'react-native'
-import {CacheStackNavProps} from '../screens/CacheStackParamList'
+import {CacheStackNavProps} from '../screens/CacheStack/CacheStackParamList'
 
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
 

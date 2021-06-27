@@ -1389,6 +1389,11 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.0.tgz#7036640b4e21cc2f259ae826ce843d277dad8cff"
   integrity sha512-RJJrrySY7A8havqpGObOB4W92QXKJo63/jFLLgpvOtsGUqbQZ9Sbgl35KMm1DjC6j7AvmmU2bIno+3IyEaemaw==
 
+"@types/suncalc@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@types/suncalc/-/suncalc-1.8.0.tgz#0f5a91cf413e667ea472947c1962521c1064bf56"
+  integrity sha512-1Bx7KgoCLP8LuKaY9whWiX0Y8JMEB9gmZHNJigainwFuv3gEkZvTx0AGNvnA5nSu1daQcJDKScm9tNpW/ZjpjA==
+
 "@types/yargs-parser@*":
   version "20.2.0"
   resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-20.2.0.tgz#dd3e6699ba3237f0348cd085e4698780204842f9"
@@ -5761,6 +5766,11 @@ react-native-dotenv@^2.5.5:
   dependencies:
     dotenv "^8.0.0"
 
+react-native-fast-image@^8.3.4:
+  version "8.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.3.4.tgz#79edca177e30311b19d59ff335625bcbe22650d7"
+  integrity sha512-LpzAdjUphihUpVEBn5fEv5AILe55rHav0YiZroPZ1rumKDhAl4u2cG01ku2Pb7l8sayjTsNu7FuURAlXUUDsow==
+
 react-native-geolocation-service@^5.3.0-beta.1:
   version "5.3.0-beta.1"
   resolved "https://registry.yarnpkg.com/react-native-geolocation-service/-/react-native-geolocation-service-5.3.0-beta.1.tgz#91b78e8f87caa0fd4fd1a2384bb48a6309ec715a"
@@ -6669,10 +6679,10 @@ sudo-prompt@^9.0.0:
   resolved "https://registry.yarnpkg.com/sudo-prompt/-/sudo-prompt-9.2.1.tgz#77efb84309c9ca489527a4e749f287e6bdd52afd"
   integrity sha512-Mu7R0g4ig9TUuGSxJavny5Rv0egCEtpZRNMrZaYS1vxkiIxGiGUwoezU3LazIQ+KE04hTrTfNPgxU5gzi7F5Pw==
 
-sunrise-sunset-js@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/sunrise-sunset-js/-/sunrise-sunset-js-2.2.1.tgz#bf541aab71b9215901fb6dee260e946fb3c7a80a"
-  integrity sha512-ErsvmxoTCZRacVPtlchkrTAR8qxypBy0BDrrv9LMugLuF0AykcS5pQsP1EhQJHgumxrTTSI8N8KJkQMVJ6dEPw==
+suncalc@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/suncalc/-/suncalc-1.8.0.tgz#1d9898109563078750f4994a959e654d876acbf5"
+  integrity sha1-HZiYEJVjB4dQ9JlKlZ5lTYdqy/U=
 
 supports-color@^5.3.0:
   version "5.5.0"

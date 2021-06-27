@@ -12,7 +12,7 @@ const RadiusSlider: React.FC<RadiusSliderProps> = ({
 }) => {
   return (
     <Slider
-      style={{ width: 300, height: 80 }}
+      style={{width: 300, height: 80}}
       minimumValue={radiusValue}
       maximumValue={50}
       step={1}

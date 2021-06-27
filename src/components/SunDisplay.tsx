@@ -28,7 +28,7 @@ const SunDisplay: React.FC<SunDisplayProps> = ({times}) => {
 }
 
 // put this above the component rendering it?
-const SunTimesItem = ({item, index}: {item: SunTimes; index: number}) => (
+const SunTimesItem = ({item}: {item: SunTimes; index: number}) => (
   <View style={styles.container}>
     <View style={styles.iconRow}>
       <Text style={styles.timeText}>{item.sunrise}</Text>
@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
   iconRow: {
     flexDirection: 'row',
     paddingVertical: 10,
-    // paddingLeft: 30,
   },
   timeText: {
     fontSize: 20,
