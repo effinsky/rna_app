@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import SunCalc from 'suncalc'
 
 // import {LocationContext, LocationType} from '../../context/LocationContext'
@@ -22,7 +22,7 @@ const SunScreen: React.FC<{}> = () => {
     const timesList = [] as SunTimes[]
 
     for (let i = 0; i < 10; i++) {
-      const {sunrise: sunriseDate, sunset: sunsetDate} = SunCalc.getTimes(
+      const { sunrise: sunriseDate, sunset: sunsetDate } = SunCalc.getTimes(
         getFutureDate(i),
         latitude,
         longitude,

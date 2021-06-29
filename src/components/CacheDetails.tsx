@@ -1,8 +1,10 @@
 import axios from 'axios'
-import React, {useEffect, useState} from 'react'
-import {Button, StyleSheet, View} from 'react-native'
-import {Text} from 'react-native'
-import {CacheStackNavProps} from '../screens/CacheStack/CacheStackParamList'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, View } from 'react-native'
+import { Text } from 'react-native'
+
+import { CacheStackScreenNavProps } from '../screens/CacheStackScreen/CacheStackScreenParamList'
+import Button from './buttons/Button'
 
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
 
@@ -14,7 +16,7 @@ type DetailsResponseType = {
   type: string
 }
 
-const CacheDetails: React.FC<CacheStackNavProps<'CacheDetails'>> = ({
+const CacheDetails: React.FC<CacheStackScreenNavProps<'CacheDetails'>> = ({
   route,
   navigation,
 }) => {
@@ -42,7 +44,7 @@ const CacheDetails: React.FC<CacheStackNavProps<'CacheDetails'>> = ({
   }
 
   if (details) {
-    const {name, code, type, location, status} = details
+    const { name, code, type, location, status } = details
     return (
       <View>
         <Text style={styles.heading}>{name}</Text>
@@ -55,6 +57,7 @@ const CacheDetails: React.FC<CacheStackNavProps<'CacheDetails'>> = ({
           onPress={() => {
             navigation.navigate('CacheSearch')
           }}
+          extraStyles={{ alignSelf: 'center' }}
         />
       </View>
     )

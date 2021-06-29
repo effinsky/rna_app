@@ -17,6 +17,13 @@
     "comma-dangle": "off",
     "no-use-before-define": "off",
     "no-unused-vars": "warn",
-    "semi": "off"
+    "semi": "off",
+    "react-native/no-inline-styles": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }

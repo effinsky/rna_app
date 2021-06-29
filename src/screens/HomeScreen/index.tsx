@@ -1,24 +1,41 @@
 import React from 'react'
-import {HomeStackParamList} from './HomeStackParamList'
-import {createStackNavigator} from '@react-navigation/stack'
+import { createStackNavigator } from '@react-navigation/stack'
 
-import CacheStack from '../CacheStack'
+import { HomeStackParamList } from './HomeStackParamList'
+import CacheStackScreen from '../CacheStackScreen'
 import SunScreen from '../SunScreen'
 import Home from './Home'
 
-const HomeTab = createStackNavigator<HomeStackParamList>()
+const HomeStack = createStackNavigator<HomeStackParamList>()
 
 const HomeScreen: React.FC<{}> = ({}) => {
   return (
-    <HomeTab.Navigator
+    <HomeStack.Navigator
       screenOptions={{
-        headerShown: false,
+        // that was tricky. headerTitleStyle: {alignSelf: 'center'} does not work
+        // anymore. What will Nav v6 bring us
+        headerTitleAlign: 'center',
+        headerStyle: { backgroundColor: '#ffa584' },
       }}
     >
-      <HomeTab.Screen name="Home" component={Home} />
-      <HomeTab.Screen name="CacheStack" component={CacheStack} />
-      <HomeTab.Screen name="SunScreen" component={SunScreen} />
-    </HomeTab.Navigator>
+      <HomeStack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          title: 'GeoLocker',
+        }}
+      />
+      <HomeStack.Screen
+        name="CacheStackScreen"
+        component={CacheStackScreen}
+        options={{ headerTitle: 'Search Caches' }}
+      />
+      <HomeStack.Screen
+        name="SunScreen"
+        component={SunScreen}
+        options={{ headerTitle: 'Sun Tables' }}
+      />
+    </HomeStack.Navigator>
   )
 }
 

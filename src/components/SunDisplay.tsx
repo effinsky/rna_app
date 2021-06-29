@@ -1,13 +1,13 @@
 import React from 'react'
-import {StyleSheet} from 'react-native'
-import {Text, FlatList, View} from 'react-native'
+import { StyleSheet } from 'react-native'
+import { Text, FlatList, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 
-import {SunTimes} from '../screens/SunScreen/index'
+import { SunTimes } from '../screens/SunScreen/index'
 
-type SunDisplayProps = {times: SunTimes[]}
+type SunDisplayProps = { times: SunTimes[] }
 
-const SunDisplay: React.FC<SunDisplayProps> = ({times}) => {
+const SunDisplay: React.FC<SunDisplayProps> = ({ times }) => {
   return (
     <View>
       <Text>Sunrise and Sunset at Your Location</Text>
@@ -18,7 +18,7 @@ const SunDisplay: React.FC<SunDisplayProps> = ({times}) => {
       <FlatList
         style={styles.flatList}
         data={times}
-        renderItem={({item, index}) => (
+        renderItem={({ item, index }) => (
           <SunTimesItem item={item} index={index} />
         )}
         keyExtractor={(_, i) => i.toString()}
@@ -28,7 +28,11 @@ const SunDisplay: React.FC<SunDisplayProps> = ({times}) => {
 }
 
 // put this above the component rendering it?
+<<<<<<< HEAD
 const SunTimesItem = ({item}: {item: SunTimes; index: number}) => (
+=======
+const SunTimesItem = ({ item }: { item: SunTimes; index: number }) => (
+>>>>>>> navigation
   <View style={styles.container}>
     <View style={styles.iconRow}>
       <Text style={styles.timeText}>{item.sunrise}</Text>

@@ -1,6 +1,6 @@
-import React, {createContext, useEffect, useState} from 'react'
-import {Platform} from 'react-native'
-import {check, PERMISSIONS, request, RESULTS} from 'react-native-permissions'
+import React, { createContext, useEffect, useState } from 'react'
+import { Platform } from 'react-native'
+import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions'
 import Geolocation from 'react-native-geolocation-service'
 
 export interface LocationType {
@@ -18,9 +18,11 @@ export interface LocationType {
   }
 }
 
-const LocationContext = createContext<LocationType | null>(null)
+const LocationContext = createContext<LocationType | null | undefined>(
+  undefined,
+)
 
-const LocationContextProvider: React.FC<{}> = ({children}) => {
+const LocationContextProvider: React.FC<{}> = ({ children }) => {
   const [locationResponse, setLocationResponse] = useState<null | LocationType>(
     null,
   )
@@ -48,10 +50,13 @@ const LocationContextProvider: React.FC<{}> = ({children}) => {
     const enableLocation = () => {
       Geolocation.getCurrentPosition(
         position => setLocationResponse(position as Required<LocationType>),
-        err => console.error(err),
+        error => {
+          setLocationResponse(null)
+          console.log(error)
+        },
         {
           enableHighAccuracy: true,
-          accuracy: {android: 'high'},
+          accuracy: { android: 'high' },
           distanceFilter: 0,
           showLocationDialog: true,
         },
@@ -67,4 +72,4 @@ const LocationContextProvider: React.FC<{}> = ({children}) => {
   )
 }
 
-export {LocationContextProvider, LocationContext}
+export { LocationContextProvider, LocationContext }

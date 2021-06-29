@@ -1,22 +1,14 @@
 import React from 'react'
-import {View, Text, Button} from 'react-native'
-import FastImage from 'react-native-fast-image'
-import {HomeTabNavProps} from './HomeStackParamList'
+import { View } from 'react-native'
+import Button from '../../components/buttons/Button'
+import { HomeStackNavProps } from './HomeStackParamList'
 
-const Home: React.FC<HomeTabNavProps<'Home'>> = ({navigation}) => {
+const Home: React.FC<HomeStackNavProps<'Home'>> = ({ navigation }) => {
   return (
     <View>
-      <Text>GeoLocker</Text>
-      <FastImage
-        style={{width: 200, height: 200, backgroundColor: '#ddd'}}
-        source={{
-          uri: 'https://www.pngkit.com/png/detail/763-7631236_globe-earth-vector-png.png',
-          priority: FastImage.priority.normal,
-        }}
-      />
       <Button
         title="Find Caches"
-        onPress={() => navigation.navigate('CacheStack')}
+        onPress={() => navigation.navigate('CacheStackScreen')}
       />
       <Button
         title="Sunrise/Sunset Times"

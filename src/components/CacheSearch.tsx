@@ -1,23 +1,25 @@
-import React, {useState, useEffect, useContext} from 'react'
-import {View, Text, StyleSheet, Pressable, FlatList} from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
 // import {CONSUMER_KEY} from '@env'
 import axios from 'axios'
-import {useCallback} from 'react'
+import { useCallback } from 'react'
 
 import RadiusSlider from './RadiusSlider'
-import {LocationContext, LocationType} from '../context/LocationContext'
-import {CacheStackNavProps} from '../screens/CacheStack/CacheStackParamList'
+// import { LocationContext, LocationType } from '../context/LocationContext'
+import { CacheStackScreenNavProps } from '../screens/CacheStackScreen/CacheStackScreenParamList'
+import CacheList from './CacheList'
+import Button from './buttons/Button'
 
 // using a local consumer_key for now since @env fails to load key sometimes
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
 
-interface CacheListElementType {
+export interface CacheListElementType {
   code: string
   name: string
 }
 
 // will also need access to lat|long (pass through context?)
-const CacheSearch: React.FC<CacheStackNavProps<'CacheSearch'>> = ({
+const CacheSearch: React.FC<CacheStackScreenNavProps<'CacheSearch'>> = ({
   navigation,
 }) => {
   const [radiusValue, setRadiusValue] = useState(3)
@@ -45,17 +47,18 @@ const CacheSearch: React.FC<CacheStackNavProps<'CacheSearch'>> = ({
                 radius: radiusValue,
               },
               retr_method: 'services/caches/geocaches',
-              retr_params: {fields: 'name'},
+              retr_params: { fields: 'name' },
               wrap: false,
               consumer_key: CONSUMER_KEY,
             },
+            timeout: 10000,
           },
         )
         .then(response => {
           const cacheContainer = []
           for (const key in response.data) {
-            const {name} = response.data[key]
-            const cache = {code: key, name}
+            const { name } = response.data[key]
+            const cache = { code: key, name }
             cacheContainer.push(cache)
           }
           setCaches(cacheContainer)
@@ -72,38 +75,18 @@ const CacheSearch: React.FC<CacheStackNavProps<'CacheSearch'>> = ({
 
   return (
     <View style={styles.container}>
-      <Text>Set Cache Search Radius:</Text>
-      <RadiusSlider
-        radiusValue={radiusValue}
-        handleRadiusChange={handleRadiusChange}
-      />
-      <Text>Current Value: {radiusValue} km</Text>
-      <Pressable
-        style={styles.searchBtn}
-        onPress={() => setExecuteSearch(true)}
-      >
-        <Text>Search Caches</Text>
-      </Pressable>
       {caches?.length > 0 ? (
-        <FlatList
-          data={caches}
-          renderItem={({item}) => (
-            <View>
-              <Pressable
-                onPress={() => {
-                  navigation.navigate('CacheDetails', {
-                    cacheCode: item.code,
-                  })
-                }}
-              >
-                <Text>{item.name}</Text>
-              </Pressable>
-            </View>
-          )}
-          keyExtractor={item => item.code}
-        />
+        <CacheList caches={caches} navigation={navigation} />
       ) : (
-        <Text>Perform Search to Display Caches</Text>
+        <View>
+          <Text>Set Cache Search Radius:</Text>
+          <RadiusSlider
+            radiusValue={radiusValue}
+            handleRadiusChange={handleRadiusChange}
+          />
+          <Text>Current Value: {radiusValue} km</Text>
+          <Button title="Search" onPress={() => setExecuteSearch(true)} />
+        </View>
       )}
     </View>
   )
@@ -113,19 +96,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: '#eee',
-  },
-  searchBtn: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 40,
-    width: 120,
-    margin: 20,
-    borderStyle: 'solid',
-    borderWidth: 2,
-    borderColor: '#8d8686',
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    backgroundColor: 'skyblue',
   },
 })
 
