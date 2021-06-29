@@ -18,7 +18,9 @@ export interface LocationType {
   }
 }
 
-const LocationContext = createContext<LocationType | null>(null)
+const LocationContext = createContext<LocationType | null | undefined>(
+  undefined,
+)
 
 const LocationContextProvider: React.FC<{}> = ({ children }) => {
   const [locationResponse, setLocationResponse] = useState<null | LocationType>(
@@ -48,7 +50,10 @@ const LocationContextProvider: React.FC<{}> = ({ children }) => {
     const enableLocation = () => {
       Geolocation.getCurrentPosition(
         position => setLocationResponse(position as Required<LocationType>),
-        err => console.error(err),
+        error => {
+          setLocationResponse(null)
+          console.log(error)
+        },
         {
           enableHighAccuracy: true,
           accuracy: { android: 'high' },

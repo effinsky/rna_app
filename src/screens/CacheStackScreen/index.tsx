@@ -7,7 +7,7 @@ import CacheDetails from '../../components/CacheDetails'
 
 const Stack = createStackNavigator()
 
-const CacheStack: React.FC<CacheStackScreenParamList> = ({}) => {
+const CacheStack: React.FC<CacheStackScreenParamList> = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="CacheSearch" component={CacheSearch} />
