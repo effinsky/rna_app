@@ -17,6 +17,12 @@
     "comma-dangle": "off",
     "no-use-before-define": "off",
     "no-unused-vars": "warn",
-    "semi": "off"
+    "semi": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }

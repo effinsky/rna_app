@@ -1,8 +1,7 @@
-import React, {useState, useEffect, useContext} from 'react'
-// change out this lib
-import {getSunrise, getSunset} from 'sunrise-sunset-js'
+import React, { useState, useEffect } from 'react'
+import SunCalc from 'suncalc'
 
-import {LocationContext, LocationType} from '../../context/LocationContext'
+// import {LocationContext, LocationType} from '../../context/LocationContext'
 import SunDisplay from '../../components/SunDisplay'
 
 export interface SunTimes {
@@ -11,41 +10,35 @@ export interface SunTimes {
 }
 
 const SunScreen: React.FC<{}> = () => {
-  // get lat and long from location context
-  const {
-    coords: {latitude, longitude},
-  } = useContext<LocationType | null>(AppContext)!
+  // const {
+  //   coords: {latitude, longitude},
+  // } = useContext<LocationType | null>(LocationContext)!
+
+  const latitude = 51.1079
+  const longitude = 17.0385
   const [times, setTimes] = useState<SunTimes[]>([])
 
   useEffect(() => {
-    const timesContainer = [] as SunTimes[]
+    const timesList = [] as SunTimes[]
 
     for (let i = 0; i < 10; i++) {
-      const sunriseDate = getSunrise(latitude, longitude, getFutureDate(i))
-      const sunsetDate = getSunset(latitude, longitude, getFutureDate(i))
-      const times = {
+      const { sunrise: sunriseDate, sunset: sunsetDate } = SunCalc.getTimes(
+        getFutureDate(i),
+        latitude,
+        longitude,
+      )
+
+      const suntimes = {
         sunrise: getHoursAndMinutes(sunriseDate),
         sunset: getHoursAndMinutes(sunsetDate),
       }
-      timesContainer.push(times)
+
+      timesList.push(suntimes)
     }
 
-    // alternatively but seems less clear
-    // const timesContainer = new Array<SunTimes | null>(10)
-    //   .fill(null)
-    //   .map((_, i) => {
-    //     const sunriseDate = getSunrise(latitude, longitude, getFutureDate(i))
-    //     const sunsetDate = getSunset(latitude, longitude, getFutureDate(i))
-    //     const times = {
-    //       sunrise: getHoursAndMinutes(sunriseDate),
-    //       sunset: getHoursAndMinutes(sunsetDate),
-    //     }
-    //     return times
-    //   })
-
-    setTimes(timesContainer)
+    setTimes(timesList)
   }, [])
-
+  // helpers
   const getFutureDate = (daysOffset: number): Date => {
     const d = new Date()
     d.setDate(d.getDate() + daysOffset)
@@ -53,9 +46,14 @@ const SunScreen: React.FC<{}> = () => {
   }
 
   const getHoursAndMinutes = (date: Date): string => {
-    const hours = date.getHours()
-    const minutes = date.getMinutes()
+    const hours = formatDigits(date.getHours())
+    const minutes = formatDigits(date.getMinutes())
     return `${hours}:${minutes}`
+  }
+
+  const formatDigits = (digits: number) => {
+    const digitsAsStr = digits.toString()
+    return digitsAsStr.length > 1 ? digitsAsStr : `0${digitsAsStr}`
   }
 
   return <SunDisplay times={times} />

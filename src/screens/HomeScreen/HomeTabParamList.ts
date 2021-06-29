@@ -1,9 +1,9 @@
-import {RouteProp} from '@react-navigation/native'
-import {StackNavigationProp} from '@react-navigation/stack'
+import { RouteProp } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 export type HomeTabParamList = {
   Home: undefined
-  CacheStack: undefined
+  CacheStackScreen: undefined
   SunScreen: undefined
 }
 
