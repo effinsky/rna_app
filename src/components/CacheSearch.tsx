@@ -8,6 +8,7 @@ import RadiusSlider from './RadiusSlider'
 // import { LocationContext, LocationType } from '../context/LocationContext'
 import { CacheStackScreenNavProps } from '../screens/CacheStackScreen/CacheStackScreenParamList'
 import CacheList from './CacheList'
+import Button from './buttons/Button'
 
 // using a local consumer_key for now since @env fails to load key sometimes
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
@@ -79,19 +80,13 @@ const CacheSearch: React.FC<CacheStackScreenNavProps<'CacheSearch'>> = ({
         <CacheList caches={caches} navigation={navigation} />
       ) : (
         <View>
-          <Text>Perform Search to Display Caches</Text>
           <Text>Set Cache Search Radius:</Text>
           <RadiusSlider
             radiusValue={radiusValue}
             handleRadiusChange={handleRadiusChange}
           />
           <Text>Current Value: {radiusValue} km</Text>
-          <Pressable
-            style={styles.searchBtn}
-            onPress={() => setExecuteSearch(true)}
-          >
-            <Text>Search Caches</Text>
-          </Pressable>
+          <Button title="Search" onPress={() => setExecuteSearch(true)} />
         </View>
       )}
     </View>
@@ -102,19 +97,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     backgroundColor: '#eee',
-  },
-  searchBtn: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 40,
-    width: 120,
-    margin: 20,
-    borderStyle: 'solid',
-    borderWidth: 2,
-    borderColor: '#8d8686',
-    borderRadius: 8,
-    paddingHorizontal: 10,
-    backgroundColor: 'skyblue',
   },
 })
 

@@ -1,5 +1,6 @@
 import Slider from '@react-native-community/slider'
 import React from 'react'
+import { StyleSheet } from 'react-native'
 
 interface RadiusSliderProps {
   radiusValue: number
@@ -12,7 +13,7 @@ const RadiusSlider: React.FC<RadiusSliderProps> = ({
 }) => {
   return (
     <Slider
-      style={{ width: 300, height: 80 }}
+      style={styles.sliderDimensions}
       minimumValue={radiusValue}
       maximumValue={50}
       step={1}
@@ -23,5 +24,12 @@ const RadiusSlider: React.FC<RadiusSliderProps> = ({
     />
   )
 }
+
+const styles = StyleSheet.create({
+  sliderDimensions: {
+    width: 300,
+    height: 80,
+  },
+})
 
 export default RadiusSlider

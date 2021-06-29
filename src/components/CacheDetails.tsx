@@ -1,8 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native'
+
 import { CacheStackScreenNavProps } from '../screens/CacheStackScreen/CacheStackScreenParamList'
+import Button from './buttons/Button'
 
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
 
@@ -55,6 +57,7 @@ const CacheDetails: React.FC<CacheStackScreenNavProps<'CacheDetails'>> = ({
           onPress={() => {
             navigation.navigate('CacheSearch')
           }}
+          extraStyles={{ alignSelf: 'center' }}
         />
       </View>
     )
