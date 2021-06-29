@@ -1,8 +1,11 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native'
 
+// import { CONSUMER_KEY } from '@env'
+import { LocationContext, LocationType } from '../context/LocationContext'
+import { getDistance } from '../utils/getDistance'
 import { CacheStackScreenNavProps } from '../screens/CacheStackScreen/CacheStackScreenParamList'
 import Button from './buttons/Button'
 
@@ -22,6 +25,17 @@ const CacheDetails: React.FC<CacheStackScreenNavProps<'CacheDetails'>> = ({
 }) => {
   const [details, setDetails] = useState<DetailsResponseType | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [distance, setDistance] = useState<number | null>(null)
+  // const contextValue = useContext<LocationType | null | undefined>(
+  //   LocationContext,
+  // )
+
+  // // if context value is truthy, it must contain the coords obj in it
+  // const { latitude, longitude } = contextValue?.coords!
+
+  // hardcoding user lat long for now
+  const latitude = 51.1079
+  const longitude = 17.0385
 
   useEffect(() => {
     axios('https://opencaching.pl/okapi/services/caches/geocache', {
@@ -31,26 +45,40 @@ const CacheDetails: React.FC<CacheStackScreenNavProps<'CacheDetails'>> = ({
       },
     })
       .then(response => {
-        setDetails(response.data)
+        const { data } = response
+        setDetails(data)
+        // if possible, get crow flight distance between user and cache
+        if (latitude && longitude) {
+          const { location } = data as DetailsResponseType
+          const [cacheLatitide, cacheLongitude] = location.split('|')
+          // getting crow flight  distance between user and cache
+          const d = getDistance(
+            latitude,
+            longitude,
+            +cacheLatitide,
+            +cacheLongitude,
+          ).toFixed(2)
+          setDistance(+d)
+        }
       })
       .catch(err => console.error(err))
       .finally(() => {
         setIsLoading(false)
       })
-  }, [details, route])
+  }, [details, route, latitude, longitude])
 
   if (isLoading) {
     return <Text>Loading...</Text>
   }
 
   if (details) {
-    const { name, code, type, location, status } = details
+    const { name, code, type, status } = details
     return (
       <View>
         <Text style={styles.heading}>{name}</Text>
         <Text>Type: {type}</Text>
-        <Text> Code: {code}</Text>
-        <Text>Location: {location}</Text>
+        <Text>Code: {code}</Text>
+        {distance && <Text>Distance from User: {distance}</Text>}
         <Text>Status: {status}</Text>
         <Button
           title="Back to Caches"

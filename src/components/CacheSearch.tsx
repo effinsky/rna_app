@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-// import {CONSUMER_KEY} from '@env'
+// import { CONSUMER_KEY } from '@env'
 import axios from 'axios'
 import { useCallback } from 'react'
 
@@ -68,6 +68,7 @@ const CacheSearch: React.FC<CacheStackScreenNavProps<'CacheSearch'>> = ({
         })
         .finally(() => {
           console.log('request executed')
+          console.log('customer key:', CONSUMER_KEY)
           setExecuteSearch(false)
         })
     }

@@ -1,10 +1,10 @@
 import 'react-native-gesture-handler'
-import {NavigationContainer} from '@react-navigation/native'
-import React, {useEffect} from 'react'
-import {StyleSheet, SafeAreaView} from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import React, { useEffect } from 'react'
+import { StyleSheet, SafeAreaView } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 
-import {LocationContextProvider} from './src/context/LocationContext'
+import { LocationContextProvider } from './src/context/LocationContext'
 import HomeScreen from './src/screens/HomeScreen'
 
 const App = () => {

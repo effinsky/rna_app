@@ -28,11 +28,7 @@ const SunDisplay: React.FC<SunDisplayProps> = ({ times }) => {
 }
 
 // put this above the component rendering it?
-<<<<<<< HEAD
-const SunTimesItem = ({item}: {item: SunTimes; index: number}) => (
-=======
 const SunTimesItem = ({ item }: { item: SunTimes; index: number }) => (
->>>>>>> navigation
   <View style={styles.container}>
     <View style={styles.iconRow}>
       <Text style={styles.timeText}>{item.sunrise}</Text>
