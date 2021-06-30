@@ -12,8 +12,8 @@ const Button: React.FC<ButtonProps> = ({ title, onPress, extraStyles }) => {
     <Pressable
       style={({ pressed }) =>
         pressed
-          ? { ...styles.searchBtn, ...extraStyles, backgroundColor: '#f87748' }
-          : { ...styles.searchBtn, ...extraStyles }
+          ? [styles.searchBtn, extraStyles, { backgroundColor: '#f87748' }]
+          : [styles.searchBtn, extraStyles]
       }
       onPress={onPress}
     >

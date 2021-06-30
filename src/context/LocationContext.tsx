@@ -64,6 +64,7 @@ const LocationContextProvider: React.FC<{}> = ({ children }) => {
     }
     // cleanup necessary?
   }, [permission])
+  console.log(locationResponse)
 
   return (
     <LocationContext.Provider value={locationResponse}>

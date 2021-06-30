@@ -4,8 +4,8 @@ import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native'
 
 // import { CONSUMER_KEY } from '@env'
-import { LocationContext, LocationType } from '../context/LocationContext'
-import { getDistance } from '../utils/getDistance'
+// import { LocationContext, LocationType } from '../context/LocationContext'
+import { getDistance } from '../helpers/distance'
 import { CacheStackScreenNavProps } from '../screens/CacheStackScreen/CacheStackScreenParamList'
 import Button from './buttons/Button'
 
