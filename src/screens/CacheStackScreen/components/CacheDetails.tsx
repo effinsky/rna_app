@@ -5,9 +5,9 @@ import { Text } from 'react-native'
 
 // import { CONSUMER_KEY } from '@env'
 // import { LocationContext, LocationType } from '../context/LocationContext'
-import { getDistance } from '../helpers/distance'
-import { CacheStackScreenNavProps } from '../screens/CacheStackScreen/CacheStackScreenParamList'
-import Button from './buttons/Button'
+import { getDistance } from '../../../helpers/distance'
+import { CacheStackScreenNavProps } from '../CacheStackScreenParamList'
+import Button from '../../../components/buttons/Button'
 
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Pressable, FlatList } from 'react-native'
 
 import { CacheListElementType } from './CacheSearch'
-import { CacheStackScreenNavProps } from '../screens/CacheStackScreen/CacheStackScreenParamList'
+import { CacheStackScreenNavProps } from '../CacheStackScreenParamList'
 
 interface CacheListProps {
   caches: CacheListElementType[]

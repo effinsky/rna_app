@@ -4,11 +4,11 @@ import { View, Text, StyleSheet } from 'react-native'
 import axios from 'axios'
 import { useCallback } from 'react'
 
-import RadiusSlider from './RadiusSlider'
+import RadiusSlider from '..'
 // import { LocationContext, LocationType } from '../context/LocationContext'
-import { CacheStackScreenNavProps } from '../screens/CacheStackScreen/CacheStackScreenParamList'
+import { CacheStackScreenNavProps } from '../CacheStackScreenParamList'
 import CacheList from './CacheList'
-import Button from './buttons/Button'
+import Button from '../../../components/buttons/Button'
 
 // using a local consumer_key for now since @env fails to load key sometimes
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'

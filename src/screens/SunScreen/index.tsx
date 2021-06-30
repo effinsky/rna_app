@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import SunCalc from 'suncalc'
 
 // import {LocationContext, LocationType} from '../../context/LocationContext'
-import SunDisplay from '../../components/SunDisplay'
+import SunDisplay from './components/SunDisplay'
 
 export interface SunTimes {
   sunrise: string
