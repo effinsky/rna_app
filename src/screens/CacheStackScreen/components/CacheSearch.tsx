@@ -4,10 +4,10 @@ import { View, Text, StyleSheet } from 'react-native'
 import axios from 'axios'
 import { useCallback } from 'react'
 
-import RadiusSlider from '..'
 // import { LocationContext, LocationType } from '../context/LocationContext'
 import { CacheStackScreenNavProps } from '../CacheStackScreenParamList'
 import CacheList from './CacheList'
+import RadiusSlider from '../../../components/RadiusSlider'
 import Button from '../../../components/buttons/Button'
 
 // using a local consumer_key for now since @env fails to load key sometimes
@@ -80,7 +80,7 @@ const CacheSearch: React.FC<CacheStackScreenNavProps<'CacheSearch'>> = ({
         <CacheList caches={caches} navigation={navigation} />
       ) : (
         <View>
-          <Text>Set Cache Search Radius:</Text>
+          <Text>Set Search Radius:</Text>
           <RadiusSlider
             radiusValue={radiusValue}
             handleRadiusChange={handleRadiusChange}

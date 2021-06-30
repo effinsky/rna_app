@@ -28,7 +28,7 @@ const HomeScreen: React.FC<{}> = ({}) => {
       <HomeStack.Screen
         name="CacheStackScreen"
         component={CacheStackScreen}
-        options={{ headerTitle: 'Search Caches' }}
+        options={{ headerTitle: 'Cache Search' }}
       />
       <HomeStack.Screen
         name="SunScreen"

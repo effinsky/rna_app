@@ -8,11 +8,16 @@ const Home: React.FC<HomeStackNavProps<'Home'>> = ({ navigation }) => {
     <View>
       <Button
         title="Find Caches"
-        onPress={() => navigation.navigate('CacheStackScreen')}
+        onPress={() => {
+          console.log('navigating to cache stack screen')
+          navigation.navigate('CacheStackScreen')
+        }}
       />
       <Button
         title="Sunrise/Sunset Times"
-        onPress={() => navigation.navigate('SunScreen')}
+        onPress={() => {
+          navigation.navigate('SunScreen')
+        }}
       />
     </View>
   )

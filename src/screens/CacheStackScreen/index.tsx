@@ -2,9 +2,9 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { CacheStackScreenParamList } from './CacheStackScreenParamList'
-import CacheSearch from '../../components/CacheSearch'
+import CacheSearch from './components/CacheSearch'
 import CacheDetails from './components/CacheDetails'
-import CacheList from '../../components/CacheList'
+import CacheList from './components/CacheList'
 
 const Stack = createStackNavigator()
 
