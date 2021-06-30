@@ -8,6 +8,7 @@ import { Text } from 'react-native'
 import { getDistance } from '../../../helpers/distance'
 import { CacheStackScreenNavProps } from '../CacheStackScreenParamList'
 import Button from '../../../components/buttons/Button'
+import { capitalize } from '../../../helpers/capitalize'
 
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
 
@@ -51,7 +52,7 @@ const CacheDetails: React.FC<CacheStackScreenNavProps<'CacheDetails'>> = ({
         if (latitude && longitude) {
           const { location } = data as DetailsResponseType
           const [cacheLatitide, cacheLongitude] = location.split('|')
-          // getting crow flight  distance between user and cache
+          // getting crow flight distance between user and cache
           const d = getDistance(
             latitude,
             longitude,
@@ -75,10 +76,11 @@ const CacheDetails: React.FC<CacheStackScreenNavProps<'CacheDetails'>> = ({
     const { name, code, type, status } = details
     return (
       <View>
-        <Text style={styles.heading}>{name}</Text>
-        <Text>Type: {type}</Text>
+        {/* capitalize name for item */}
+        <Text style={styles.heading}>{capitalize(name)}</Text>
+        <Text style={styles.text}>Type: {type}</Text>
         <Text>Code: {code}</Text>
-        {distance && <Text>Distance from User: {distance}</Text>}
+        {distance && <Text>Distance from User: {distance} km</Text>}
         <Text>Status: {status}</Text>
         <Button
           title="Back to Caches"
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   text: {
-    fontSize: 20,
+    fontSize: 15,
   },
 })
 

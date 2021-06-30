@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, Text, Pressable, FlatList } from 'react-native'
+import { View, Text, Pressable, FlatList, StyleSheet } from 'react-native'
 
 import { CacheListElementType } from './CacheSearch'
 import { CacheStackScreenNavProps } from '../CacheStackScreenParamList'
+import { capitalize } from '../../../helpers/capitalize'
 
 interface CacheListProps {
   caches: CacheListElementType[]
@@ -11,19 +12,28 @@ interface CacheListProps {
 const CacheList: React.FC<
   Pick<CacheStackScreenNavProps<'CacheSearch'>, 'navigation'> & CacheListProps
 > = ({ caches, navigation }) => {
+  const cachesCapitalized = caches.map(item => {
+    item.name = capitalize(item.name)
+    return item
+  })
   return (
     <View>
       <Text>Cache Results</Text>
       <FlatList
-        data={caches}
+        data={cachesCapitalized}
         renderItem={({ item }) => (
-          <View>
+          <View style={styles.listItemContainer}>
             <Pressable
               onPress={() => {
                 navigation.navigate('CacheDetails', {
                   cacheCode: item.code,
                 })
               }}
+              style={({ pressed }) =>
+                pressed
+                  ? [styles.item, { backgroundColor: '#ffa584' }]
+                  : [styles.item]
+              }
             >
               <Text>{item.name}</Text>
             </Pressable>
@@ -34,5 +44,10 @@ const CacheList: React.FC<
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  listItemContainer: { paddingVertical: 8 },
+  item: { backgroundColor: '#fdcfbd', paddingVertical: 2 },
+})
 
 export default CacheList

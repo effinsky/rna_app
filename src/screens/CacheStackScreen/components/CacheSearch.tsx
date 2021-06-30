@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 // import { CONSUMER_KEY } from '@env'
 import axios from 'axios'
@@ -9,6 +9,7 @@ import { CacheStackScreenNavProps } from '../CacheStackScreenParamList'
 import CacheList from './CacheList'
 import RadiusSlider from '../../../components/RadiusSlider'
 import Button from '../../../components/buttons/Button'
+import { LocationContext, LocationType } from '../../../context/LocationContext'
 
 // using a local consumer_key for now since @env fails to load key sometimes
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
@@ -23,19 +24,19 @@ const CacheSearch: React.FC<CacheStackScreenNavProps<'CacheSearch'>> = ({
   navigation,
 }) => {
   const [radiusValue, setRadiusValue] = useState(3)
-
-  // const {
-  //   coords: {latitude, longitude},
-  // } = useContext<null | LocationType>(LocationContext)
   const [caches, setCaches] = useState([] as CacheListElementType[])
   const [executeSearch, setExecuteSearch] = useState(false)
+
+  const { latitude, longitude } = useContext<null | undefined | LocationType>(
+    LocationContext,
+  )?.coords!
 
   const handleRadiusChange = useCallback((newSliderValue: number) => {
     setRadiusValue(+newSliderValue.toFixed(2))
   }, [])
 
   useEffect(() => {
-    if (executeSearch) {
+    if (executeSearch && latitude && longitude) {
       axios
         .get(
           'https://opencaching.pl/okapi/services/caches/shortcuts/search_and_retrieve',
@@ -44,6 +45,7 @@ const CacheSearch: React.FC<CacheStackScreenNavProps<'CacheSearch'>> = ({
               search_method: 'services/caches/search/nearest',
               search_params: {
                 center: '51.1079|17.0385',
+                // center: `${latitude}|${longitude}`,
                 radius: radiusValue,
               },
               retr_method: 'services/caches/geocaches',
@@ -68,11 +70,10 @@ const CacheSearch: React.FC<CacheStackScreenNavProps<'CacheSearch'>> = ({
         })
         .finally(() => {
           console.log('request executed')
-          console.log('customer key:', CONSUMER_KEY)
           setExecuteSearch(false)
         })
     }
-  }, [executeSearch, radiusValue])
+  }, [executeSearch, radiusValue, latitude, longitude])
 
   return (
     <View style={styles.container}>

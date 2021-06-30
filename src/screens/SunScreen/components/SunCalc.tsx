@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import { Text, View } from 'react-native'
 import SC from 'suncalc'
 
 import SunDisplay from './SunDisplay'
@@ -54,6 +55,14 @@ const SunCalc: React.FC<{}> = ({}) => {
 
     setTimes(timesList)
   }, [getHoursAndMinutes])
+
+  if (!(latitude && longitude)) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
 
   return <SunDisplay times={times} />
 }

@@ -43,21 +43,21 @@ const LocationContextProvider: React.FC<{}> = ({ children }) => {
           }
         })
       } else {
-        throw 'location inaccessible'
+        throw new Error('location inaccessible')
       }
     })
 
     const enableLocation = () => {
       Geolocation.getCurrentPosition(
         position => setLocationResponse(position as Required<LocationType>),
-        error => {
+        _ => {
           setLocationResponse(null)
-          console.log(error)
         },
         {
           enableHighAccuracy: true,
           accuracy: { android: 'high' },
           distanceFilter: 0,
+          forceRequestLocation: true,
           showLocationDialog: true,
         },
       )
