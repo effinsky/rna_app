@@ -39,8 +39,3 @@ const styles = StyleSheet.create({
 })
 
 export default Button
-
-// squares
-//x =  10
-// guess: 3 * 3 == 9
-
