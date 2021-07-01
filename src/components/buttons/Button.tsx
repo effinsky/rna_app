@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Pressable, Text, Platform } from 'react-native'
+import { StyleSheet, Pressable, Text } from 'react-native'
 
 interface ButtonProps {
   title: string
@@ -39,3 +39,8 @@ const styles = StyleSheet.create({
 })
 
 export default Button
+
+// squares
+//x =  10
+// guess: 3 * 3 == 9
+

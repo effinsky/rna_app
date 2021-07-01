@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Text, View } from 'react-native'
 import SC from 'suncalc'
+import range from 'lodash/range'
 
 import SunDisplay from './SunDisplay'
 
@@ -38,9 +39,9 @@ const SunCalc: React.FC<{}> = ({}) => {
   useEffect(() => {
     const timesList = [] as SunTimes[]
 
-    for (let i = 0; i < 10; i++) {
+    range(0, 10).map(e => {
       const { sunrise: sunriseDate, sunset: sunsetDate } = SC.getTimes(
-        getFutureDate(i),
+        getFutureDate(e),
         latitude,
         longitude,
       )
@@ -49,9 +50,8 @@ const SunCalc: React.FC<{}> = ({}) => {
         sunrise: getHoursAndMinutes(sunriseDate),
         sunset: getHoursAndMinutes(sunsetDate),
       }
-
       timesList.push(suntimes)
-    }
+    })
 
     setTimes(timesList)
   }, [getHoursAndMinutes])
