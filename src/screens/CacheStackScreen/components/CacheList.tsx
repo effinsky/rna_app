@@ -3,7 +3,7 @@ import { View, Text, Pressable, FlatList, StyleSheet } from 'react-native'
 
 import { CacheListElementType } from './CacheSearch'
 import { CacheStackScreenNavProps } from '../CacheStackScreenParamList'
-import { capitalize } from '../../../helpers/capitalize'
+import { capitalize } from 'lodash'
 
 interface CacheListProps {
   caches: CacheListElementType[]

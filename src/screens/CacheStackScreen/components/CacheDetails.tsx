@@ -4,11 +4,11 @@ import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native'
 
 // import { CONSUMER_KEY } from '@env'
-// import { LocationContext, LocationType } from '../context/LocationContext'
-import { getDistance } from '../../../helpers/distance'
+// import { LocationContext, LocationType } from '@context/LocationContext'
+import { getDistance } from 'helpers/distance'
 import { CacheStackScreenNavProps } from '../CacheStackScreenParamList'
-import Button from '../../../components/buttons/Button'
-import { capitalize } from '../../../helpers/capitalize'
+import Button from 'components/buttons/Button'
+import { capitalize } from 'lodash'
 
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'
 

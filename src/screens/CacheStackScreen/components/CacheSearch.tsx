@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-// import { CONSUMER_KEY } from '@env'
+// import { CONSUMER_KEY as CK } from '@env'
 import axios from 'axios'
 import { useCallback } from 'react'
 
-// import { LocationContext, LocationType } from '../context/LocationContext'
+// import { LocationContext, LocationType } from '@context/LocationContext'
 import { CacheStackScreenNavProps } from '../CacheStackScreenParamList'
 import CacheList from './CacheList'
-import RadiusSlider from '../../../components/RadiusSlider'
-import Button from '../../../components/buttons/Button'
-import { LocationContext, LocationType } from '../../../context/LocationContext'
+import RadiusSlider from 'components/RadiusSlider'
+import Button from 'components/buttons/Button'
+import { LocationContext, LocationType } from 'context/LocationContext'
 
 // using a local consumer_key for now since @env fails to load key sometimes
 const CONSUMER_KEY = 'wNcQ3up26jfZ4FBkb6Cc'

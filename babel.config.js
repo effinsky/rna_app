@@ -9,5 +9,22 @@ module.exports = {
         allowUndefined: false,
       },
     ],
+    // tell babel how to transpile from absolute paths
+    [
+      'module-resolver',
+      {
+        extensions: [
+          '.js',
+          '.jsx',
+          '.ts',
+          '.tsx',
+          '.android.js',
+          '.android.tsx',
+          '.ios.js',
+          '.ios.tsx',
+        ],
+        root: ['src'],
+      },
+    ],
   ],
 }

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 import { Text, FlatList, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 
-import { SunTimes } from '../index'
+import { SunTimes } from 'screens/SunScreen/components/SunCalc'
 
 type SunDisplayProps = { times: SunTimes[] }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
-import Button from '../../components/buttons/Button'
+
+import Button from 'components/buttons/Button'
 import { HomeStackNavProps } from './HomeStackParamList'
 
 const Home: React.FC<HomeStackNavProps<'Home'>> = ({ navigation }) => {

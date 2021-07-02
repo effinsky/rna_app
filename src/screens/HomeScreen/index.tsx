@@ -2,8 +2,8 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { HomeStackParamList } from './HomeStackParamList'
-import CacheStackScreen from '../CacheStackScreen'
-import SunScreen from '../SunScreen'
+import CacheStackScreen from 'screens/CacheStackScreen'
+import SunScreen from 'screens/SunScreen'
 import Home from './Home'
 
 const HomeStack = createStackNavigator<HomeStackParamList>()
