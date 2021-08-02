@@ -57,7 +57,7 @@ const SunCalc: React.FC<{}> = ({}) => {
     })
 
     setTimes(timesList)
-  }, [getHoursAndMinutes])
+  }, [getHoursAndMinutes, getFutureDate])
 
   if (!(latitude && longitude)) {
     return (

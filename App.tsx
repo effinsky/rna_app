@@ -11,12 +11,14 @@ const App = () => {
   useEffect(() => {
     SplashScreen.hide()
   }, [])
+
   return (
     <NavigationContainer>
       <LocationContextProvider>
         <SafeAreaView style={styles.container}>
-          {/* to check if Hermes is active (have switched it on) */}
-          {/* <Text>{`is Hermes?: ${!!global.HermesInternal}`}</Text> */}
+          {/* to check if Hermes is active (have switched it on)  */}
+          {/* @ts-ignore */}
+          <Text>{`is Hermes?: ${!!global.HermesInternal}`}</Text>
           <HomeScreen />
         </SafeAreaView>
       </LocationContextProvider>
