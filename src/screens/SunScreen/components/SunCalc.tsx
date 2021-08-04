@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { Text, View } from 'react-native'
 import range from 'lodash/range'
 import SC from 'suncalc'
@@ -18,6 +18,8 @@ const SunCalc: React.FC<{}> = ({}) => {
   const latitude = 51.1079
   const longitude = 17.0385
   const [times, setTimes] = useState<SunTimes[]>([])
+  // to make sure we don't try to update state on an unmounted component
+  const isMounted = useRef(true)
 
   const getFutureDate = useCallback((daysOffset: number): Date => {
     const d = new Date()
@@ -40,6 +42,12 @@ const SunCalc: React.FC<{}> = ({}) => {
   )
 
   useEffect(() => {
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
+
+  useEffect(() => {
     const timesList = [] as SunTimes[]
 
     range(0, 10).map(e => {
@@ -55,7 +63,9 @@ const SunCalc: React.FC<{}> = ({}) => {
       })
     })
 
-    setTimes(timesList)
+    if (isMounted.current) {
+      setTimes(timesList)
+    }
   }, [getHoursAndMinutes, getFutureDate])
 
   if (!(latitude && longitude)) {
