@@ -49,11 +49,10 @@ const SunCalc: React.FC<{}> = ({}) => {
         longitude,
       )
 
-      const suntimes = {
+      timesList.push({
         sunrise: getHoursAndMinutes(sunriseDate),
         sunset: getHoursAndMinutes(sunsetDate),
-      }
-      timesList.push(suntimes)
+      })
     })
 
     setTimes(timesList)
